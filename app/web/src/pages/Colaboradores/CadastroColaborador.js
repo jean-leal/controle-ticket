@@ -34,7 +34,6 @@ const CadastroColaborador = () =>{
           setMessage('Cadastrado efetuado com sucesso!')
           setType('success')
         }
-        console.log(data)
       })
       .catch((err)=> console.log(err))
   }

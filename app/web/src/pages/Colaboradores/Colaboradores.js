@@ -61,7 +61,7 @@ const Colaboradores = () => {
                 <td>{new Date(colaborador.updatedAt).toLocaleDateString('pt-br')}</td>
                 <td>              
                   <div>
-                    <LinkButton to={`/lancar-colaborador/${colaborador._id}`} text="Lançar Ticket"/>
+                    <LinkButton to={`/lancar-ticket/${colaborador._id}`} text="Lançar Ticket"/>
                     <LinkButton to={`/editar-colaborador/${colaborador._id}`} text="Editar"/>
                   </div>
                 </td>

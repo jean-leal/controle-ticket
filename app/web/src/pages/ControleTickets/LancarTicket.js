@@ -2,8 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 import Input from '../../components/form/Input';
+import styles from './LancarTicket.module.css';
+import Message from "../../components/layout/mesage";
+
 
 const EditarColaborador = () =>{
+  const [message, setMessage] = useState();
+  const [type, setType] = useState();
+
   const {_id} = useParams()
   const [colaborador, setColaborador] = useState ([]);
   const [qtdTicket, setQtdTicket] = useState();
@@ -24,6 +30,8 @@ const EditarColaborador = () =>{
 
 
   const lancar = () =>{
+    setMessage('');
+
     const lancarTicket = {colaboradorId: _id, qtdTicketEntregue: qtdTicket };
 
     fetch("http://localhost:8000/ticket", {
@@ -35,27 +43,38 @@ const EditarColaborador = () =>{
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data)
+        if (data.error === true){
+          setMessage('Informe a quantidade de Ticket entregue!')
+          setType('error')
+        }else{
+          setMessage('Lançamento efetuado com sucesso!')
+          setType('success')
+        }
       })
+      .catch((err)=> console.log(err))
   }
 
   return(
-    <div>
-      <Input
-        type="text"
-        text="Nome"
-        name="name"
-        value={colaborador.nome}
-      />
-      <Input
-        type="number"
-        text="Ticket Entregue"
-        name="ticket"
-        placeholder="Insira quantidade entregue"
-        handleOnChange={(e) => setQtdTicket(e.target.value) }
-      />
-     
-      <button onClick={lancar}>Lançar</button>
+    <div className={styles.container}>
+       <div className={styles.item}>
+       {message && <Message type={type} msg={message}/>}
+        <Input
+          type="text"
+          text="Nome"
+          name="name"
+          value={colaborador.nome}
+        />
+        <Input
+          type="number"
+          text="Ticket Entregue"
+          name="ticket"
+          placeholder="Insira quantidade entregue"
+          handleOnChange={(e) => setQtdTicket(e.target.value) }
+        />
+        <div className={styles.item}> 
+          <button className={styles.btn} onClick={lancar}>Salvar</button>
+        </div>
+      </div>
     </div>
   )
 };

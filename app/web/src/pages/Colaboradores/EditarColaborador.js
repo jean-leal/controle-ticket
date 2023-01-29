@@ -2,8 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 import Input from '../../components/form/Input';
+import styles from './CadastroColaborador.module.css';
+import Message from "../../components/layout/mesage";
 
 const EditarColaborador = () =>{
+  const [message, setMessage] = useState();
+  const [type, setType] = useState();
+
   const {_id} = useParams()
   const [status, setStatus] = useState();
   const [nome, setName] = useState('');
@@ -29,7 +34,7 @@ const EditarColaborador = () =>{
 
   const editar = () =>{
     const colaborador = {nome: nome, cpf: cpf, status: status};
-
+      setMessage('');
     fetch(`http://localhost:8000/colaborador/${_id}`, {
       method: 'PUT',
       headers: {
@@ -39,37 +44,49 @@ const EditarColaborador = () =>{
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data)
+        if (data.error === true){
+          setMessage(`${data.message}`)
+          setType('error')
+        }else{
+          setMessage('Edição efetuada com sucesso!')
+          setType('success')
+        }
       })
+      .catch((err)=> console.log(err))
   }
 
   return(
-    <div>
-      <Input
-        type="text"
-        text="Nome"
-        name="name"
-        placeholder="Insira o nome"
-        handleOnChange={(e) => setName(e.target.value) }
-        value={nome}
-      />
-      <Input
-        type="number"
-        text="CPF"
-        name="cpf"
-        placeholder="Insira o CPF"
-        handleOnChange={(e) => setCpf(e.target.value) }
-        value={cpf}
-      />
-      <Input
-        type="text"
-        text="Status"
-        name="Status"
-        placeholder="Status"
-        handleOnChange={(e) => setStatus(e.target.value) }
-        value={status}
-      />
-      <button onClick={editar}>Salvar</button>
+    <div className={styles.container}>
+      <div className={styles.item}>
+        {message && <Message type={type} msg={message}/>}
+        <Input
+          type="text"
+          text="Nome"
+          name="name"
+          placeholder="Insira o nome"
+          handleOnChange={(e) => setName(e.target.value) }
+          value={nome}
+        />
+        <Input
+          type="number"
+          text="CPF"
+          name="cpf"
+          placeholder="Insira o CPF"
+          handleOnChange={(e) => setCpf(e.target.value) }
+          value={cpf}
+        />
+        <Input
+          type="text"
+          text="Status 'A' ou 'I'"
+          name="Status"
+          placeholder="Status"
+          handleOnChange={(e) => setStatus(e.target.value) }
+          value={status}
+        />
+        <div className={styles.item}>
+          <button className={styles.btn} onClick={editar}>Salvar</button>
+        </div>
+      </div>
     </div>
   )
 };
