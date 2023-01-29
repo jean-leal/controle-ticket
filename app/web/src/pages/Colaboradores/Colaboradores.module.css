@@ -1,0 +1,33 @@
+.containerBody {
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  width: 100%; 
+}
+
+.pesquisa{ 
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerTable {
+ width: 100%;
+ justify-content: center;
+}
+
+table, th, td {  
+  border-bottom: 1px solid black;
+}
+
+table {  
+  border-collapse: collapse;
+}
+    
+th, td{
+ min-width: 140px;
+}
+
+td div{ 
+  display: flex;
+}

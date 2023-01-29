@@ -1,0 +1,4 @@
+# dependencies
+/app/api/node_modules
+/app/web/node_modules
+

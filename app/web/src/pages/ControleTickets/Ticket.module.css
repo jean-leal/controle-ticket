@@ -1,0 +1,17 @@
+.container_body {
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  width: 100%;
+}
+table, th, td {
+  border-bottom: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+    
+th, td{
+  width: 100%;
+}

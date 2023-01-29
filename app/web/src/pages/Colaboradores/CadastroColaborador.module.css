@@ -1,0 +1,25 @@
+.container{
+  display: flex;
+  width: 100%;
+  
+}
+
+.item{
+  margin: 10px auto;
+  width: 50%;  
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 5px;
+  background-color: #283618;
+  color: #FFF;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  color: #bc6c25; 
+}
