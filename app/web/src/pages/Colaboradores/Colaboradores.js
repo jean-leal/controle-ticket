@@ -8,8 +8,7 @@ const Colaboradores = () => {
   const [colaboradores, setColaboradores] = useState('');
   const [search, setSearch] = useState('');
 
-  // busca de colaboradores pelo nome 
-  
+  // busca de colaboradores pelo nome   
   const filterColaboradores = search.length > 0 
   ? colaboradores.filter(colaborador => new RegExp(search, "i").test(colaborador.nome))
   : colaboradores;

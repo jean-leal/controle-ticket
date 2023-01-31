@@ -47,7 +47,7 @@ const CadastroColaborador = () =>{
           text="Nome"
           name="name"
           placeholder="Insira o nome"
-          handleOnChange={(e) => setName(e.target.value) }
+          handleOnChange={(e) => setName(e.target.value)}
         
         />
         <Input

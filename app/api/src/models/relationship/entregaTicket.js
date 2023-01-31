@@ -2,10 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const entregaTicket = new Schema({
-  colaboradorId: {
+  colaborador: {
+    colaboradorId : {
     type: mongoose.Types.ObjectId,
     ref: 'Colaborador',
     required: true,
+    }, 
+    nome : {
+      type: String,
+      required: true
+    },
+    cpf : {
+      type: Number,
+      required: true
+    }    
   }, 
   qtdTicketEntregue:{
     type: Number,

@@ -31,8 +31,15 @@ const EditarColaborador = () =>{
 
   const lancar = () =>{
     setMessage('');
-
-    const lancarTicket = {colaboradorId: _id, qtdTicketEntregue: qtdTicket };
+    
+    const lancarTicket = { 
+      colaborador : {
+        colaboradorId: _id,
+        nome: colaborador.nome,
+        cpf: colaborador.cpf
+      }, 
+      qtdTicketEntregue: qtdTicket 
+    };
 
     fetch("http://localhost:8000/ticket", {
       method: 'POST',

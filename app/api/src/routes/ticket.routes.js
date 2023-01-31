@@ -13,8 +13,8 @@ router.post('/', async (req, res)=>{
 
 router.get('/tickets', async (req, res)=>{ // buscando todos os tikets no banco.
   try{
-    const tikets = await Ticket.find();
-    res.json({ tikets })
+    const tickets = await Ticket.find();
+    res.json({ tickets })
   } catch (err) {
     res.json({error: true, message: err.message});
   }
