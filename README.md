@@ -9,7 +9,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 ### 📋 Pré-requisitos
 
-Tenha instalado em sua maquina.
+Tenha instalado em sua máquina.
 * Node.js
 * Editor de Código (Vs Code, Sublime Text, etc)
 * GitHub 
@@ -17,7 +17,11 @@ Tenha instalado em sua maquina.
 
 ### 🔧 Instalação
 
-Após feito o clone do Projeto, dentro das pastas "api" e "web" de o comando "npm install"
+Após feito o clone do Projeto, dentro das pastas "api" e "web" dê o comando "npm install" pelo prompt de comando.
+
+Após este procedimento já estará pronto para uso... Lembrando que o servidor está separado do front, então dê o comando dentro do prompt de comando "npm start" em cada pasta e deixe ele rodando nas duas. Abrir a tela do front sozinha.
+
+Prontinho é só usar. 
 
 
 
