@@ -13,6 +13,7 @@ const Colaboradores = () => {
   ? colaboradores.filter(colaborador => new RegExp(search, "i").test(colaborador.nome))
   : colaboradores;
   
+  //solicita ao abrir a pagina todos os colaboradores cadastrados no banco 
   useEffect(() => {
     fetch('http://localhost:8000/colaborador/colaboradores', {
       method: 'GET' , 

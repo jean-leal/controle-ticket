@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Ticket = require('../models/relationship/entregaTicket');
 
-router.post('/', async (req, res)=>{
+router.post('/', async (req, res)=>{// rota para cadastro do lançamento dos tickets 
   try{
     const tiket = await new Ticket(req.body).save();   
     res.json({ error: false});

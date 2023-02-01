@@ -3,14 +3,14 @@ import { useState } from "react";
 import Input from '../../components/form/Input';
 import styles from './CadastroColaborador.module.css';
 import Message from "../../components/layout/mesage";
+import Button from "../../components/form/Button";
 
 const CadastroColaborador = () =>{
   const [message, setMessage] = useState();
   const [type, setType] = useState();
 
   const [nome, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  
+  const [cpf, setCpf] = useState('');  
 
   const cadastrar = () =>{
     setMessage('');
@@ -47,19 +47,20 @@ const CadastroColaborador = () =>{
           text="Nome"
           name="name"
           placeholder="Insira o nome"
-          handleOnChange={(e) => setName(e.target.value)}
-        
+          handleOnChange={(e) => setName(e.target.value)}        
         />
         <Input
           type="number"
           text="CPF"
           name="cpf"
           placeholder="Insira o CPF"
-          handleOnChange={(e) => setCpf(e.target.value) }
-    
+          handleOnChange={(e) => setCpf(e.target.value)}    
         />
         <div className={styles.item}>
-          <button className={styles.btn} onClick={cadastrar}>Cadastrar</button> 
+          <Button
+            text="Cadastrar"
+            handleClick={cadastrar}
+          />
         </div>
       </div>
     </div>

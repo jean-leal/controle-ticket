@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Input from '../../components/form/Input';
 import styles from './LancarTicket.module.css';
 import Message from "../../components/layout/mesage";
-
+import Button from '../../components/form/Button';
 
 const EditarColaborador = () =>{
   const [message, setMessage] = useState();
@@ -27,7 +27,6 @@ const EditarColaborador = () =>{
     })
     .catch((err)=> console.log(err))
   }, [])
-
 
   const lancar = () =>{
     setMessage('');
@@ -79,7 +78,10 @@ const EditarColaborador = () =>{
           handleOnChange={(e) => setQtdTicket(e.target.value) }
         />
         <div className={styles.item}> 
-          <button className={styles.btn} onClick={lancar}>Salvar</button>
+          <Button
+            text="Salvar"
+            handleClick={lancar}
+          />
         </div>
       </div>
     </div>

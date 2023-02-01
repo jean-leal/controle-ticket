@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Colaborador = require('../models/colaborador');
 
-router.post('/', async (req, res)=>{
+//utilizando o try, catch para o tratamento de erro, para não parar a aplicação
+
+router.post('/', async (req, res)=>{ // rota para cadastrar os colaboradores 
   try{
     //tratar para não permitir cadastro duplicado de CPF
     const { cpf } = req.body;
@@ -18,7 +20,7 @@ router.post('/', async (req, res)=>{
   }
 });
 
-router.get('/colaboradores/:id', async (req, res)=>{ // buscando colaborador com o id passado na url
+router.get('/colaboradores/:id', async (req, res)=>{ // buscando colaborador conforme o id passado na url
   try{ 
     const _id = req.params.id;
     const colaborador = await Colaborador.findOne({ _id });
@@ -48,4 +50,4 @@ router.put('/:id', async (req, res)=>{
   }
 });
 
-module.exports = router;
+module.exports = router; //exportando as rotas 

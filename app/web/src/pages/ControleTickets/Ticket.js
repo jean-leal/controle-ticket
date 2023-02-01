@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Button from "../../components/form/Button";
 import Input from "../../components/form/Input";
 
 import styles from './Ticket.module.css';
@@ -57,27 +58,30 @@ const Colaboradores = () => {
         <div className={styles.pesquisa_data}>
           <span className={styles.item}>
             <Input            
-            text="Data Inicial"
-            type="Date"
-            handleOnChange={(e) => setDataInicial(e.target.value)}
+              text="Data Inicial"
+              type="Date"
+              handleOnChange={(e) => setDataInicial(e.target.value)}
             />
           </span>
           <span className={styles.item}>
             <Input
-            text="Data Final"
-            type="Date"
-            handleOnChange={(e) => setDataFinal(e.target.value)}
+              text="Data Final"
+              type="Date"
+              handleOnChange={(e) => setDataFinal(e.target.value)}
             />
           </span>
           <span className={styles.item}>
-            <button className={styles.btn} onClick={pesquisaData}>Pesquisar</button>
+            <Button
+              text="Pesquisar"
+              handleClick={pesquisaData}
+            />
           </span>          
         </div>        
         <Input
-        text="Pesquisa por nome:"
-        placeholder="Pesquise pelo nome"
-        type="text"
-        handleOnChange={(e) => setPesquisaNome(e.target.value)}
+          text="Pesquisa por nome:"
+          placeholder="Pesquise pelo nome"
+          type="text"
+          handleOnChange={(e) => setPesquisaNome(e.target.value)}
         />
       </div>
       <div>

@@ -14,18 +14,6 @@
   padding: 5px;
 }
 
-.btn {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 10px 5px;
-  background-color: #283618;
-  color: #FFF;
-  border-radius: 5px;
-  text-decoration: none;
-  border: none;
-}
-
 table, th, td {
   border-bottom: 1px solid black;
 }
