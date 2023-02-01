@@ -4,31 +4,12 @@ import Input from "../../components/form/Input";
 import styles from './Ticket.module.css';
 
 const Colaboradores = () => {
+  const [pesquisaNome, setPesquisaNome] = useState('');
   const [tickets, setTickets] = useState([]);
   const [dataInicial, setDataInicial] = useState();
   const [dataFinal, setDataFinal] = useState();
-  let pesquisa = '';
-  
-  // função para somar todos os tickets lançados dentro da data estipulada. 
-  const totalEntregue = tickets.map(ticket => ticket.qtdTicketEntregue).reduce((prev, curr) =>prev + curr, 0);
-  
-  const pesquisaData = () => {
-    const inicial = new Date(dataInicial)
-    //const final = new Date(dataFinal).toLocaleDateString()
-    console.log(inicial)
-    
-    console.log(dataFinal)
-    pesquisa = tickets.filter(ticket =>{
-      let data =  new Date(ticket.createdAt)
-      let options = { year: 'numeric', month: '2-digit', day: '2-digit' }
-      data.toLocaleDateString('pt-BR', options)
-      console.log(data)
-      return(data == dataFinal)// && data <= final)      
-    })
-
-    setTickets(pesquisa)
-  }
-
+ 
+  //puxa do banco todos os lançamentos de ticket feito 
   useEffect(() => {
     fetch('http://localhost:8000/ticket/tickets', {
       method: 'GET' , 
@@ -43,21 +24,61 @@ const Colaboradores = () => {
     .catch((err)=> console.log(err))
   }, [])
 
+  // busca de colaboradores pelo nome
+   const ticketsFiltrados = pesquisaNome.length > 0 
+   ? tickets.filter(ticket => new RegExp(pesquisaNome, "i").test(ticket.colaborador.nome))
+   : tickets;
+
+    
+  // função para somar todos os tickets lançados dentro da data estipulada. 
+  const totalEntregue = ticketsFiltrados.map(ticket => ticket.qtdTicketEntregue).reduce((prev, curr) =>prev + curr, 0);
+
+  //função para pesquisa por data.
+  const  pesquisaData = async () => {
+    if (!dataFinal  && !dataInicial){
+      alert("Adiocione data inicial e final!")
+    } else{
+    const inicial = new Date(dataInicial).toISOString().substr(0, 10);
+    const final = new Date(dataFinal).toISOString().substr(0, 10);    
+    
+    let pesquisa = await tickets.filter(ticket =>{
+      let data =  new Date(ticket.createdAt).toISOString().substr(0, 10);
+      
+      return( (data >= inicial ) && (data <= final))
+    })
+
+    setTickets(pesquisa)
+    }    
+  }
+
   return (
     <div className={styles.container_body}>
       <div>
-        <h2>Tickets</h2>
+        <div className={styles.pesquisa_data}>
+          <span className={styles.item}>
+            <Input            
+            text="Data Inicial"
+            type="Date"
+            handleOnChange={(e) => setDataInicial(e.target.value)}
+            />
+          </span>
+          <span className={styles.item}>
+            <Input
+            text="Data Final"
+            type="Date"
+            handleOnChange={(e) => setDataFinal(e.target.value)}
+            />
+          </span>
+          <span className={styles.item}>
+            <button className={styles.btn} onClick={pesquisaData}>Pesquisar</button>
+          </span>          
+        </div>        
         <Input
-        text="Data Inicial"
-        type="Date"
-        handleOnChange={(e) => setDataInicial(e.target.value)}
+        text="Pesquisa por nome:"
+        placeholder="Pesquise pelo nome"
+        type="text"
+        handleOnChange={(e) => setPesquisaNome(e.target.value)}
         />
-        <Input
-        text="Data Final"
-        type="Date"
-        handleOnChange={(e) => setDataFinal(e.target.value)}
-        />
-        <button onClick={pesquisaData}>Pesquisar</button>
       </div>
       <div>
         <table>
@@ -74,8 +95,8 @@ const Colaboradores = () => {
             </tr>
           </thead>
           <tbody>
-          {tickets.length > 0 &&
-            tickets.map((ticket) => (
+          {ticketsFiltrados.length > 0 &&
+            ticketsFiltrados.map((ticket) => (
               <tr key={ticket._id}>
               <td>{ticket.colaborador.nome}</td>
               <td>{ticket.colaborador.cpf}</td>
